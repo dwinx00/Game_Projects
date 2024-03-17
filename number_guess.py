@@ -8,7 +8,6 @@
 
 import random
 
-
 # Difficulty Menu Creation
 def difficult_mode():
     while True:  # Main Menu
