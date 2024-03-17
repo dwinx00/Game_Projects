@@ -41,7 +41,7 @@ def numbergame():
     print("Welcome to Number Guess Game")
     print("You Will Guess the Random Number between 1 and 100")
     difficult_level = difficult_mode()
-    print(f"The difficulty level is {difficult_level}")
+    print("The difficulty level is", difficult_level)
     # Easy Mode
     if difficult_level == "Easy":
         attempt = 10
