@@ -13,11 +13,11 @@ import random
 def difficult_mode():
     while True:  # Main Menu
         try:
-            print("--- Difficulty Options ---")
-            print("  1 - Easy (10 Attempts) ")
-            print("  2 - Medium (7 Attempts) ")
-            print("  3 - Hard (5 Attempts) ")
-            print("---------------------------")
+            print(" --- Difficulty Options ---")
+            print("  [1] - Easy (10 Attempts) ")
+            print("  [2] - Medium (7 Attempts) ")
+            print("  [3] - Hard (5 Attempts) ")
+            print("----------------------------")
             difficulty = int(input("Enter the Difficulty: "))
             assert difficulty in range(1, 4), "Invalid Input. Please Choose 1 to 3 Only"
             if difficulty == 1:
@@ -33,7 +33,20 @@ def difficult_mode():
             print(msg)
 
         except ValueError:
-            print("Invalid Input. Integers Only")
+            print("Invalid Input.")
+
+
+def hint_system(Guess_numb, winning_number, hint_numb):
+    if winning_number < Guess_numb:
+        if winning_number - 10 < 1:  # if the hint number becomes negative or zero
+            print(f"Hint: The Winning Number is less than {Guess_numb} but greater than 1")
+        else:
+            print(f"Hint: The Winning Number is less than {Guess_numb} but greater than {winning_number - hint_numb}")
+    else:
+        if winning_number + 10 > 100:  # if hint number will greater than 100
+            print(f"Hint: The Winning Number is greater than {Guess_numb} but less than 100")
+        else:
+            print(f"Hint: The Winning Number is greater than {Guess_numb} but less than {winning_number + hint_numb}")
 
 
 # Main Game
@@ -72,7 +85,9 @@ def numbergame():
     while user_attempt < attempt:
         try:
             Guess_numb = int(input("Enter your Guess Number: "))
-            if Guess_numb == winning_number:
+            if Guess_numb == winning_number:  # Game Win
+                print("\n--------------------------------")
+                print(" You Won. :)")
                 print(" You Guessed the Winning Number ")
                 print(f" Your Final Score: {user_score}")
                 break
@@ -84,26 +99,15 @@ def numbergame():
                 print(f"The Current Score:{user_score}")
                 # If Guess is Higher or Lower
                 if Guess_numb > winning_number:
-                    print(" The Guess is Too High")
+                    print("- The Guess is Too High")
                 else:
-                    print(" The Guess is Too Low")
+                    print("- The Guess is Too Low")
 
             # Hint every two incorrect attempts
             if user_attempt % 2 == 0:
                 hint = input("Do you Want Hint (Y/N): ")
                 if hint.lower() == "y":
-                    if winning_number < Guess_numb:
-                        if winning_number - 10 < 1:  # if the hint number becomes negative or zero
-                            print(f"The Winning Number is less than {Guess_numb} but greater than 1")
-                        else:
-                            print(
-                                f"The Winning Number is less than {Guess_numb} but greater than {winning_number - hint_numb}")
-                    else:
-                        if winning_number + 10 > 100:  # if hint number will greater than 100
-                            print(f"The Winning Number is greater than {Guess_numb} but less than 100")
-                        else:
-                            print(
-                                f"The Winning Number is greater than {Guess_numb} but less than {winning_number + hint_numb}")
+                    hint_system(Guess_numb, winning_number, hint_numb)
                 else:
                     print("Good Luck!")
 
@@ -112,8 +116,11 @@ def numbergame():
 
     # Game Conclusion:
     else:
-        print("You Lose")
-    print(f"The Winning Number is {winning_number}")
+        print("\n--------------------------------")
+        print(" You Lose. :(")  # Game Lose
+
+    print(f" The Winning Number is {winning_number}")  # Winner Number
+    print("--------------------------------")
 
     # Restart the Game
     restart = input(" Do You Want to Play Again (y/n): ")
