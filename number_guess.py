@@ -35,7 +35,7 @@ def difficult_mode():
         except ValueError:
             print("Invalid Input.")
 
-
+# Game Hint System
 def hint_system(Guess_numb, winning_number, hint_numb):
     if winning_number < Guess_numb:
         if winning_number - 10 < 1:  # if the hint number becomes negative or zero
